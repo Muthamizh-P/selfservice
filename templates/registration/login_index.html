@@ -1,0 +1,40 @@
+{% extends "index.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock style %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
+                <div class="card">
+                    <h5 class="card-header heading">Login</h5>
+                    <div class="card-body">
+                        {% for message in messages %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <form action="{% url 'check_mail_exist' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp" required>
+                                <div id="usernameHelp" class="form-text">We'll never share your email with anyone else.</div>
+                            </div>
+                            <br>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" type="submit">Next</button>
+                            </div>
+                            <a href="{% url 'forgot_username' %}" class="btn btn-link" style="text-decoration: none;">Forgot Username?</a>
+                            <br>
+                            <a href="{% url 'signup' %}" class="btn btn-link" style="text-decoration: none;">SignUp</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

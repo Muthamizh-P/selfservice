@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}Sign Page{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
+                <div class="card">
+                    <h5 class="card-header heading">Register</h5>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <button type="submit" class="btn btn-primary">Register</button> |
+                            <a href="{% url 'login_index' %}" class="btn btn-success"> Go to Login Page</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
